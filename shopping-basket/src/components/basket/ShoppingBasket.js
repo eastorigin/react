@@ -7,6 +7,9 @@ export default function ShoppingBasket() {
   const { contextItem } = useContext(ItemContext);
   const { contextAllChecked } = useContext(ItemContext);
 
+  const checkedItemNumber = contextItem.filter((item) => item.isChecked).length;
+  const totalItemNumber = contextItem.length;
+
   const onClickAllCheckHandler = (event) => {
     contextAllChecked(event);
   };
@@ -18,7 +21,9 @@ export default function ShoppingBasket() {
           <Item key={item.id} item={item} />
         ))}
         <input onClick={onClickAllCheckHandler} type="checkbox" id="allCheck" />
-        <label htmlFor="allCheck">전체 선택 (/)</label>
+        <label htmlFor="allCheck">
+          전체 선택 ({checkedItemNumber}/{totalItemNumber})
+        </label>
       </ul>
       <AddItem />
     </div>
