@@ -17,8 +17,8 @@ export default function ShoppingBasket() {
         {contextItem.map((item) => (
           <Item key={item.id} item={item} />
         ))}
-        <label htmlFor="allCheck">전체 선택 (/)</label>
         <input onClick={onClickAllCheckHandler} type="checkbox" id="allCheck" />
+        <label htmlFor="allCheck">전체 선택 (/)</label>
       </ul>
       <AddItem />
     </div>
