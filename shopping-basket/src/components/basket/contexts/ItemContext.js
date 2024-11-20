@@ -71,6 +71,13 @@ export function ItemContextProvider({ children }) {
         payload: { id: deleteId },
       });
     },
+
+    contextUpdateNumber(id, amount) {
+      itemDispatcher({
+        type: "UPDATENUMBER",
+        payload: { id, amount },
+      });
+    },
   };
 
   return (

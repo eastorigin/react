@@ -25,6 +25,14 @@ export const itemReducer = (state, action) => {
     }));
   } else if (type === "DELETE") {
     return state.filter((item) => item.id !== action.payload.id);
+  } else if (type === "UPDATENUMBER") {
+    return state.map((item) => {
+      if (item.id === action.payload.id) {
+        const newNumber = parseInt(item.number) + action.payload.amount;
+        return { ...item, number: newNumber < 0 ? 0 : newNumber };
+      }
+      return item;
+    });
   }
   return state;
 };

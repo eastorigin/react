@@ -6,6 +6,7 @@ export default function Item({ item }) {
 
   const { contextChecked } = useContext(ItemContext);
   const { contextDeleteItem } = useContext(ItemContext);
+  const { contextUpdateNumber } = useContext(ItemContext);
 
   const onClickCheckHandler = (event) => {
     contextChecked(event);
@@ -13,6 +14,14 @@ export default function Item({ item }) {
 
   const onClickDeleteHandler = () => {
     contextDeleteItem({ target: { value: id } });
+  };
+
+  const decreaseHandler = () => {
+    contextUpdateNumber(id, -1);
+  };
+
+  const increaseHandler = () => {
+    contextUpdateNumber(id, 1);
   };
 
   return (
@@ -30,7 +39,9 @@ export default function Item({ item }) {
         <image src={picture} />
       </div>
       <div>{price}원</div>
+      <button onClick={decreaseHandler}>-</button>
       <div>{number}개</div>
+      <button onClick={increaseHandler}>+</button>
       <button onClick={onClickDeleteHandler}>삭제</button>
     </li>
   );
