@@ -76,9 +76,9 @@ export default function App() {
 }
 */
 
-import State from "./components/tutorial/State";
+import Login from "./components/github/GithubLogin";
 
 export default function App() {
   console.log("App 컴포넌트가 실행되었습니다");
-  return <State />;
+  return <Login />;
 }
