@@ -11,6 +11,13 @@ export const itemReducer = (state, action) => {
       },
       ...state,
     ];
+  } else if (type === "CHECKED") {
+    return state.map((item) => {
+      if (item.id === action.payload.id) {
+        item.isChecked = action.payload.isChecked;
+      }
+      return item;
+    });
   }
 
   return state;

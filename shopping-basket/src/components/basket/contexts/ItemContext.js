@@ -4,6 +4,9 @@ import { itemReducer } from "../reducers/itemReducer";
 export const ItemContext = createContext({
   contextItem: [],
   contextAddItem(name, price, number, picture, alertRef) {},
+  contextChecked(event) {},
+  contextAllChecked(event) {},
+  contextDeleteItem(event) {},
 });
 
 export function ItemContextProvider({ children }) {
@@ -11,6 +14,19 @@ export function ItemContextProvider({ children }) {
 
   const contextImplementation = {
     contextItem: item,
+
+    contextChecked(event) {
+      const checkedId = parseInt(event.target.value);
+      const isChecked = event.target.checked;
+
+      itemDispatcher({
+        type: "CHECKED",
+        payload: { id: checkedId, isChecked },
+      });
+    },
+
+    contextAllChecked(event) {},
+
     contextAddItem(name, price, number, picture, alertRef) {
       let alertMessages = [];
       if (!name) {
@@ -39,6 +55,8 @@ export function ItemContextProvider({ children }) {
         payload: { name, price, number, picture },
       });
     },
+
+    contextDeleteItem(event) {},
   };
 
   return (
