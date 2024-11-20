@@ -18,7 +18,13 @@ export const itemReducer = (state, action) => {
       }
       return item;
     });
+  } else if (type === "ALLCHECKED") {
+    return state.map((item) => ({
+      ...item,
+      isChecked: action.payload.isChecked,
+    }));
+  } else if (type === "DELETE") {
+    return state.filter((item) => item.id !== action.payload.id);
   }
-
   return state;
 };

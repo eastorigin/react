@@ -25,7 +25,14 @@ export function ItemContextProvider({ children }) {
       });
     },
 
-    contextAllChecked(event) {},
+    contextAllChecked(event) {
+      const isChecked = event.target.checked;
+
+      itemDispatcher({
+        type: "ALLCHECKED",
+        payload: { isChecked },
+      });
+    },
 
     contextAddItem(name, price, number, picture, alertRef) {
       let alertMessages = [];
@@ -56,7 +63,14 @@ export function ItemContextProvider({ children }) {
       });
     },
 
-    contextDeleteItem(event) {},
+    contextDeleteItem(event) {
+      const deleteId = parseInt(event.target.value);
+
+      itemDispatcher({
+        type: "DELETE",
+        payload: { id: deleteId },
+      });
+    },
   };
 
   return (

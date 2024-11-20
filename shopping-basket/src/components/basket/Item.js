@@ -11,8 +11,8 @@ export default function Item({ item }) {
     contextChecked(event);
   };
 
-  const onClickDeleteHandler = (event) => {
-    contextDeleteItem(event);
+  const onClickDeleteHandler = () => {
+    contextDeleteItem({ target: { value: id } });
   };
 
   return (
