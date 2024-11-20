@@ -36,7 +36,7 @@ export default function Item({ item }) {
       </div>
       <div>{name}</div>
       <div>
-        <image src={picture} />
+        <img src={picture} alt={name} />
       </div>
       <div>{price}원</div>
       <button onClick={decreaseHandler}>-</button>

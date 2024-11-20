@@ -57,9 +57,11 @@ export function ItemContextProvider({ children }) {
         return false;
       }
 
+      const pictureUrl = URL.createObjectURL(picture);
+
       itemDispatcher({
         type: "ADD",
-        payload: { name, price, number, picture },
+        payload: { name, price, number, picture: pictureUrl },
       });
     },
 

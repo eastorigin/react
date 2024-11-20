@@ -14,7 +14,7 @@ export default function AddItem() {
   const onClickAddButtonHandler = () => {
     const name = nameRef.current.value;
     const number = numberRef.current.value;
-    const picture = pictureRef.current.value;
+    const picture = pictureRef.current.files[0];
     const price = priceRef.current.value;
 
     const result = contextAddItem(name, price, number, picture, alertRef);
