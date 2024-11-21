@@ -21,9 +21,9 @@ export default function AddItem() {
 
     if (result) {
       nameRef.current.value = "";
-      number.current.value = "";
+      numberRef.current.value = "";
       priceRef.current.value = "";
-      picture.current.value = "";
+      pictureRef.current.value = null;
     }
   };
 
@@ -37,7 +37,7 @@ export default function AddItem() {
         ref={nameRef}
       />
 
-      <label htmlFor="price">가격</label>
+      <label htmlFor="price">개당 가격</label>
       <input
         type="number"
         id="price"
