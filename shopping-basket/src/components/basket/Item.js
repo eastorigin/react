@@ -13,7 +13,7 @@ export default function Item({ item }) {
   };
 
   const onClickDeleteHandler = () => {
-    contextDeleteItem({ target: { value: id } });
+    contextDeleteItem(id);
   };
 
   const decreaseHandler = () => {

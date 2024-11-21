@@ -6,7 +6,7 @@ export const ItemContext = createContext({
   contextAddItem(name, price, number, picture, alertRef) {},
   contextChecked(event) {},
   contextAllChecked(event) {},
-  contextDeleteItem(event) {},
+  contextDeleteItem(id) {},
 });
 
 export function ItemContextProvider({ children }) {
@@ -65,12 +65,10 @@ export function ItemContextProvider({ children }) {
       });
     },
 
-    contextDeleteItem(event) {
-      const deleteId = parseInt(event.target.value);
-
+    contextDeleteItem(id) {
       itemDispatcher({
         type: "DELETE",
-        payload: { id: deleteId },
+        payload: { id },
       });
     },
 
