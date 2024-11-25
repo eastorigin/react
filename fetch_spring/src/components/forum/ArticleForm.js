@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { postArticle } from "../http/http";
 
-export default function ArticleForm({ onPostSaveActionHandler }) {
+export default function ArticleForm({ articleDispatcher, articleAction }) {
   const subjectRef = useRef();
   const contentRef = useRef();
 
@@ -24,7 +24,8 @@ export default function ArticleForm({ onPostSaveActionHandler }) {
       contentRef.current.value = "";
     }
 
-    onPostSaveActionHandler();
+    articleDispatcher(articleAction.write({}));
+    articleDispatcher(articleAction.clear());
   };
 
   return (

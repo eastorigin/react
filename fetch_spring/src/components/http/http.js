@@ -54,22 +54,30 @@ export const getArticleList = async (pageNo) => {
 
   const response = await fetch(articleListUrl, fetchOption);
   const articleListJson = await response.json();
+
+  if (articleListJson.error && articleListJson.message) {
+    throw Error(articleListJson.message);
+  }
+
   return articleListJson;
 };
 
 export const postArticle = async (subject, content) => {
-  const articlePostUrl = "http://localhost:8080/api/v1/board/write";
+  const postArticleUrl = "http://localhost:8080/api/v1/board/write";
   const jwt = sessionStorage.getItem("token");
 
-  const response = await fetch(articlePostUrl, {
+  let fetchOption = {
     method: "post",
+    body: JSON.stringify({ subject, content }),
     headers: {
       "Content-Type": "application/json",
       Authorization: jwt,
     },
-    body: JSON.stringify({ subject, content }),
-  });
+  };
 
-  const postJson = await response.json();
-  return postJson;
+  const response = await fetch(postArticleUrl, fetchOption);
+  const articlePostJson = await response.json();
+  console.log("articlePostJson", articlePostJson);
+
+  return articlePostJson;
 };
