@@ -110,3 +110,8 @@ export default function ArticleList() {
     </>
   );
 }
+
+/**
+ * SliceStore (reducers => Action)
+ * useSelector(); -> Store(SliceStore, SliceStore, .........)
+ */
