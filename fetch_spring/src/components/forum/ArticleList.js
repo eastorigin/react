@@ -17,7 +17,7 @@ export default function ArticleList() {
 
   const loadArticles = useCallback(() => {
     return getArticleList(article.pageNo);
-  }, [article.pageNo]);
+  }, [article.pageNo, article.data]);
 
   const { fectchData, isLoading, errors } = useFetch(
     { body: [] },
