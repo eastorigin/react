@@ -1,0 +1,40 @@
+Context API
+    - State를 중앙집중식으로 관리한다.
+    - Context(ContextProvider) + Reducer
+    - 단점
+        1. Context 내부의 state가 변경될 때 Context 하위의 모든 컴포넌트가 재실행된다.
+            -> 성능 하락 원인으로 작용.
+        2. 주제별 State(예> 게시글, 회원, 댓글, …)를 관리하려면 복수개의 Context가 필요하다
+            -> ContextProvider를 중첩해야 한다
+            -> 최상위 Context의 state가 변경되면, 하위 ContextProvider를 포함한 모든 컴포넌트가 재실행
+                -> 성능 하락의 원인으로 작용
+        3. 1, 2의 단점으로 인해서, 소규모 애플리케이션 제작에서만 사용
+            -> 컴포넌트가 재실행되더라도 유의미한 성능 하락이 발생하지 않는다
+            -> 대규모(컴포넌트 개수, 데이터베이스의 양) 애플리케이션 제작에서 Context를 사용할 경우 눈에 띄게 성능하락이 발생한다. (컴포넌트 재실행)
+            -> 컴포넌트 최적화 기법들이 필수로 사용되어야 한다 => Context를 사용하는 컴포넌트는 컴포넌트 최적화 불가능!
+Redux
+    - State를 중앙집중식으로 관리하는 것 자체는 Context와 동일
+    - ContextProvider + Reducer
+    - Context 차이점
+        - 주제별 Context를 중복 생성하지 않는다
+            -> Redux는 단 하나의 Store(State 저장소)만 관리한다
+        - Redux Stroe가 변경되면, 모든 컴포넌트가 재실행되지 않는다.
+            -> Redux Store를 구독하는 컴포넌트만 재실행된다.
+	            -> useSelector() 사용 => Redux Store 구독
+            -> Context를 사용하는 것보다 빠르다 => 성능 하락이 Context에 비해 적다
+    - 단점
+        1. 라이브러리가 거대하다 => Redux를 구동하는 것 자체가 무거운 작업
+            -> 소규모 애플리케이션에서는 성능이 더 하락될 수 있다.
+        2. Store State 구조를 변경하는 것이 자유롭지 않다.
+            -> Store의 State 구조를 변경했을 때, useSelector()를 사용하는 모든 컴포넌트를 수정.
+            -> 애플리케이션 설계 단계에서 store 구조를 확정지어야 한다. 그 이후엔 store 구조가 변경되면 안 된다
+redux-toolkit : Store의 State 구조를 변경하는 것이 자유롭지 않은 단점을 개선.
+    - Redux를 사용 => 단 1개의 store에 여러 개의 state를 관리한다
+    - Tookit은 store에 state를 직접 생성하지 않는다
+    - Toolkit은 작은 단위의 store(Slice Store)를 주제별로 생성해서 1개의 redux store에 넣는다.
+    - Toolkit이 관리하는 관심사는 slice store
+    - State 구조 변경에서 비교적 자유롭다
+        - Slice store의 state 구조를 변경하면 해당 state를 사용하는 컴포넌트는 반드시 수정
+            - Redux에 비해 수정량이 적다
+    - State를 변경할 때, 네트워크 통신이 필요할 경우(fetch)
+        - Fetch를 컴포넌트가 아닌, slice store에 의해 자동으로 요청 및 응답처리가 가능하다.
