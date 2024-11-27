@@ -20,6 +20,8 @@ const articleSliceStore = createSlice({
   initialState: {
     pageNo: 0,
     data: [],
+    isLoading: true,
+    errors: undefined,
   },
   // article-slice-store를 변경시킬 함수들
   reducers: {
@@ -41,6 +43,8 @@ const articleSliceStore = createSlice({
       return {
         pageNo: 0,
         data: [],
+        isLoading: true,
+        errors: undefined,
       };
     },
     updatePageNo(articleState, articleAction) {
@@ -61,8 +65,15 @@ const articleSliceStore = createSlice({
           articleState.data.push(newArticle);
         }
       }
-      // 배열의 마지막에 데이터를 덧붙인다
-      // articleState.push(...articleAction.payload.body);
+    },
+    startRequest(articleState) {
+      articleState.isLoading = true;
+    },
+    endRequest(articleState) {
+      articleState.isLoading = false;
+    },
+    setErrors(articleState, articleAction) {
+      articleState.errors = articleAction.payload;
     },
   },
 });

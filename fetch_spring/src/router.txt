@@ -1,0 +1,6 @@
+DNS: Domain Name Server
+nslookup: 특정 도메인의 ip를 알 수 있음
+ex> nslookup naver.com
+router가 DNS 뒤에 딱 붙어있음
+내가 원하는 목적지가 어디있는지 찾는게 router
+react에서의 router: url별로 연결하는 component한테 어떻게 가장 빨리 찾는가

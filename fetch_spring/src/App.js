@@ -1,5 +1,4 @@
-import ArticleList from "./components/forum/ArticleList";
-import Login from "./components/forum/Login";
+import AppRouterProvider from "./routers/AppRouters";
 import { AppProvider } from "./stores/ToolkitStore";
 
 export default function App() {
@@ -8,10 +7,7 @@ export default function App() {
 
   return (
     <AppProvider>
-      <div>
-        <Login />
-        <ArticleList />
-      </div>
+      <AppRouterProvider />
     </AppProvider>
   );
 }
