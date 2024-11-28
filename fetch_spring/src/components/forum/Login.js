@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { memberAction } from "../../stores/ToolkitStore";
 import { getMyToken } from "../../stores/thunks/loginThunk";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const emailRef = useRef();
@@ -35,15 +36,15 @@ export default function Login() {
     loginDispatcher(getMyToken(email, password));
   };
 
-  const onClickLogoutHandler = () => {
-    loginDispatcher(memberAction.clearMember());
-    // sessionStorage.removeItem("token");
-    // sessionStorage.removeItem("info");
-    // setLoginState({
-    //   token: "",
-    //   info: {},
-    // });
-  };
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // 로그인이 완료되었을 때 /article로 이동시키기
+    if (loginState.info && loginState.info.email) {
+      // /article로 이동.
+      navigate("/articles");
+    }
+  }, [loginState, navigate]);
 
   return (
     <div>
@@ -52,12 +53,6 @@ export default function Login() {
           <input type="email" ref={emailRef} />
           <input type="password" ref={passwordRef} />
           <button onClick={onClickLoginHandler}>Login</button>
-        </>
-      )}
-      {loginState.info && loginState.info.email && (
-        <>
-          {loginState.info.name} ({loginState.info.email})
-          <button onClick={onClickLogoutHandler}>Logout</button>
         </>
       )}
     </div>

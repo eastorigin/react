@@ -1,9 +1,15 @@
 import { useRef } from "react";
 import { postArticle } from "../http/http";
+import { articleAction } from "../../stores/ToolkitStore";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-export default function ArticleForm({ articleDispatcher, articleAction }) {
+export default function ArticleForm() {
   const subjectRef = useRef();
   const contentRef = useRef();
+  const articleDispatcher = useDispatch();
+
+  const navigate = useNavigate();
 
   const onClickAddButtonHandler = async () => {
     const subject = subjectRef.current.value;
@@ -26,6 +32,9 @@ export default function ArticleForm({ articleDispatcher, articleAction }) {
 
     articleDispatcher(articleAction.write({}));
     articleDispatcher(articleAction.clear());
+
+    // /articles로 이동
+    navigate("/articles");
   };
 
   return (

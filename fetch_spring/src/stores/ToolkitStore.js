@@ -50,6 +50,16 @@ const articleSliceStore = createSlice({
     updatePageNo(articleState, articleAction) {
       articleState.pageNo = articleAction.payload;
     },
+    readOne(articleState, articleAction) {
+      // articleAction : { id: 1030, viewCount: 1 }
+      const { id, viewCnt } = articleAction.payload;
+
+      for (const article of articleState.data) {
+        if (article.id === id) {
+          article.viewCnt = viewCnt;
+        }
+      }
+    },
     readList(articleState, articleAction) {
       for (let i = 0; i < articleAction.payload.body.length; i++) {
         const newArticle = articleAction.payload.body[i];

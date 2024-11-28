@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Article from "./Article";
 import { useDispatch, useSelector } from "react-redux";
-import ArticleForm from "./ArticleForm";
 import { articleAction } from "../../stores/ToolkitStore";
 import { readArticles } from "../../stores/thunks/articleThunk";
 import { Spinner } from "../ui/Spinner";
+import { Link } from "react-router-dom";
 
 export default function ArticleList() {
   const { article, member } = useSelector((state) => ({ ...state }));
   const { isLoading, errors } = article;
-
-  const [visible, setVisible] = useState(false);
 
   const onClickMoreHandler = () => {
     articleDispatcher(articleAction.updatePageNo(article.pageNo + 1));
@@ -31,6 +29,7 @@ export default function ArticleList() {
             <div>{errors}</div>
           </>
         )}
+
         <table style={{ width: "100%" }}>
           <thead>
             <tr>
@@ -59,22 +58,7 @@ export default function ArticleList() {
             )}
         </table>
         <button onClick={onClickMoreHandler}>더보기</button>
-
-        {member.info && member.info.email && (
-          <button
-            onClick={() => {
-              setVisible(!visible);
-            }}
-          >
-            {visible ? "취소" : "글쓰기"}
-          </button>
-        )}
-        {member.info && member.info.email && visible && (
-          <ArticleForm
-            articleDispatcher={articleDispatcher}
-            articleAction={articleAction}
-          />
-        )}
+        {member.info && member.info.email && <Link to="/write">글쓰기</Link>}
       </div>
     </>
   );

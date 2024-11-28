@@ -1,4 +1,4 @@
-import { getArticleList } from "../../components/http/http";
+import { getArticleList, getArticleOne } from "../../components/http/http";
 import { articleAction } from "../ToolkitStore";
 
 export const readArticles = (pageNo) => {
@@ -12,5 +12,12 @@ export const readArticles = (pageNo) => {
     } finally {
       dispatcher(articleAction.endRequest()); // isLoading = false
     }
+  };
+};
+
+export const readOneArticle = (id) => {
+  return async (dispatcher) => {
+    const article = await getArticleOne(id);
+    dispatcher(articleAction.readOne(article.body));
   };
 };

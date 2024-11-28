@@ -62,6 +62,21 @@ export const getArticleList = async (pageNo) => {
   return articleListJson;
 };
 
+export const getArticleOne = async (id) => {
+  const articleOneUrl = `http://localhost:8080/api/v1/board/view/${id}`;
+  const jwt = sessionStorage.getItem("token");
+
+  const response = await fetch(articleOneUrl, {
+    method: "get",
+    headers: {
+      Authorization: jwt,
+    },
+  });
+
+  const articleOneJson = await response.json();
+  return articleOneJson;
+};
+
 export const postArticle = async (subject, content) => {
   const postArticleUrl = "http://localhost:8080/api/v1/board/write";
   const jwt = sessionStorage.getItem("token");
